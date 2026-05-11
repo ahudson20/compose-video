@@ -19,10 +19,6 @@ import android.net.Uri
 import androidx.annotation.RawRes
 import androidx.media3.common.MediaItem.DrmConfiguration
 import androidx.media3.common.MediaMetadata
-import io.sanghun.compose.video.uri.VideoPlayerMediaItem.AssetFileMediaItem
-import io.sanghun.compose.video.uri.VideoPlayerMediaItem.NetworkMediaItem
-import io.sanghun.compose.video.uri.VideoPlayerMediaItem.RawResourceMediaItem
-import io.sanghun.compose.video.uri.VideoPlayerMediaItem.StorageMediaItem
 
 interface BaseVideoPlayerMediaItem {
     val mediaMetadata: MediaMetadata

@@ -16,13 +16,13 @@
 package io.sanghun.compose.video.uri
 
 import android.annotation.SuppressLint
+import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import androidx.media3.datasource.AssetDataSource
 import androidx.media3.datasource.DataSpec
 import androidx.media3.datasource.FileDataSource
 import androidx.media3.datasource.FileDataSource.FileDataSourceException
-import androidx.media3.datasource.RawResourceDataSource
 
 /**
  * Converts [VideoPlayerMediaItem] to [android.net.Uri].
@@ -35,7 +35,10 @@ internal fun VideoPlayerMediaItem.toUri(
     context: Context,
 ): Uri = when (this) {
     is VideoPlayerMediaItem.RawResourceMediaItem -> {
-        RawResourceDataSource.buildRawResourceUri(resourceId)
+        Uri.Builder()
+            .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+            .path(resourceId.toString())
+            .build()
     }
 
     is VideoPlayerMediaItem.AssetFileMediaItem -> {

@@ -29,26 +29,23 @@ import io.sanghun.compose.video.util.findActivity
  * @param context Activity context.
  * @param defaultPlayerView Current video player controller.
  */
-@Suppress("DEPRECATION")
 internal fun enterPIPMode(context: Context, defaultPlayerView: PlayerView) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
-        context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
-    ) {
-        defaultPlayerView.useController = false
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val params = PictureInPictureParams.Builder()
+    if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)) return
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                params
-                    .setTitle("Video Player")
-                    .setAspectRatio(Rational(16, 9))
-                    .setSeamlessResizeEnabled(true)
-            }
+    defaultPlayerView.useController = false
 
-            context.findActivity().enterPictureInPictureMode(params.build())
-        } else {
-            context.findActivity().enterPictureInPictureMode()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val params = PictureInPictureParams.Builder()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            params
+                .setTitle("Video Player")
+                .setAspectRatio(Rational(16, 9))
+                .setSeamlessResizeEnabled(true)
         }
+        context.findActivity().enterPictureInPictureMode(params.build())
+    } else {
+        @Suppress("DEPRECATION")
+        context.findActivity().enterPictureInPictureMode()
     }
 }
 
@@ -58,11 +55,5 @@ internal fun enterPIPMode(context: Context, defaultPlayerView: PlayerView) {
  * @return `true` if the activity is in pip mode. (PIP mode is not supported in the version below Android N, so `false` is returned unconditionally.)
  */
 internal fun Context.isActivityStatePipMode(): Boolean {
-    val currentActivity = findActivity()
-
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        currentActivity.isInPictureInPictureMode
-    } else {
-        false
-    }
+    return findActivity().isInPictureInPictureMode
 }

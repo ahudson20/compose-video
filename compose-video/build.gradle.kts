@@ -64,11 +64,11 @@ kotlin {
     }
 }
 
-afterEvaluate {
-    tasks.named("dokkaHtmlPartial") {
-
-    }
-}
+//afterEvaluate {
+//    tasks.named("dokkaHtmlPartial") {
+//
+//    }
+//}
 
 dependencies {
     implementation(libs.androidx.core)
