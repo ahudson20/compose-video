@@ -1,20 +1,8 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-apply(from = "${rootDir}/publish.gradle")
-apply(from = "${rootDir}/scripts/publish-root.gradle")
-apply(from = "${rootDir}/scripts/publish-module.gradle")
-
 plugins {
     id("com.android.library")
-//    id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("me.tylerbwong.gradle.metalava") version "0.5.0"
-    id("org.jetbrains.dokka")
-}
-
-metalava {
-    filename.set("api/current.api")
-    reportLintsAsErrors.set(true)
 }
 
 android {
@@ -42,14 +30,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-//    kotlinOptions {
-//        jvmTarget = "1.8"
-//    }
-//    kotlin {
-//        compilerOptions {
-//            jvmTarget.set(JvmTarget.JVM_1_8)
-//        }
-//    }
     lint {
         targetSdk = 36
     }
@@ -63,12 +43,6 @@ kotlin {
         jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
-
-//afterEvaluate {
-//    tasks.named("dokkaHtmlPartial") {
-//
-//    }
-//}
 
 dependencies {
     implementation(libs.androidx.core)
