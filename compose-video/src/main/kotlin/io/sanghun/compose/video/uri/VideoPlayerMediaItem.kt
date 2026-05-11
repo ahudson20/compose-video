@@ -42,7 +42,7 @@ sealed interface VideoPlayerMediaItem : BaseVideoPlayerMediaItem {
      * @param mimeType Media mime type.
      */
     data class RawResourceMediaItem(
-        @RawRes val resourceId: Int,
+        @param:RawRes val resourceId: Int,
         override val mediaMetadata: MediaMetadata = MediaMetadata.EMPTY,
         override val mimeType: String = "",
     ) : VideoPlayerMediaItem
