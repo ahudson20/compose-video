@@ -33,7 +33,6 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.window.SecureFlagPolicy
 import androidx.lifecycle.Lifecycle
@@ -63,9 +62,9 @@ import io.sanghun.compose.video.uri.toUri
 import io.sanghun.compose.video.util.findActivity
 import io.sanghun.compose.video.util.setFullScreen
 import kotlinx.coroutines.Dispatchers
-import java.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import java.util.UUID
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -302,7 +301,7 @@ internal fun VideoPlayerSurface(
     onPipEntered: () -> Unit = {},
     autoDispose: Boolean = true,
 ) {
-    val lifecycleOwner = rememberUpdatedState(LocalLifecycleOwner.current)
+    val lifecycleOwner = rememberUpdatedState(androidx.lifecycle.compose.LocalLifecycleOwner.current)
     val context = LocalContext.current
 
     var isPendingPipMode by remember { mutableStateOf(false) }

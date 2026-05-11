@@ -17,6 +17,8 @@ package io.sanghun.compose.video.cache
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.annotation.OptIn
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.database.StandaloneDatabaseProvider
 import androidx.media3.datasource.cache.Cache
 import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor
@@ -26,6 +28,7 @@ import java.io.File
 /**
  * Manage video player cache.
  */
+@OptIn(UnstableApi::class)
 object VideoPlayerCacheManager {
 
     private lateinit var cacheInstance: Cache

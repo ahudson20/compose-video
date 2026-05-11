@@ -1,14 +1,14 @@
 plugins {
     id("com.android.test")
-    id("org.jetbrains.kotlin.android")
+//    id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "io.sanghun.compose.video.benchmark"
 
-    compileSdk = 33
+    compileSdk = 36
     defaultConfig {
-        minSdk = 23
+        minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
     }

@@ -1,16 +1,19 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+//    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "io.sanghun.compose.video.sample"
-    compileSdk = 33
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "io.sanghun.compose.video.sample"
-        minSdk = 23
-        targetSdk = 32
+        minSdk = 24
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -48,21 +51,32 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+//    kotlin {
+//        compilerOptions {
+//            jvmTarget.set(JvmTarget.JVM_1_8)
+//        }
+//    }
 
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
+//    composeOptions {
+//        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+//    }
 
-    packagingOptions {
+    packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
 

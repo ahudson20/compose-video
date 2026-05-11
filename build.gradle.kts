@@ -1,18 +1,19 @@
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-
 plugins {
-    id("com.android.application") version "7.4.2" apply false
-    id("com.android.library") version "7.4.2" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.22" apply false
+    id("com.android.application") version "9.1.1" apply false
+    id("com.android.library") version "9.1.1" apply false
+//    id("org.jetbrains.kotlin.android") version "2.3.21" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version "2.3.21" apply false
 
-    id("com.diffplug.spotless") version "6.14.0"
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
-    id("org.jetbrains.dokka") version "1.7.20"
+    id("com.diffplug.spotless") version "8.4.0"
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
+    id("org.jetbrains.dokka") version "2.2.0"
 }
 
-tasks.withType(DokkaMultiModuleTask::class).configureEach {
-    outputDirectory.set(rootProject.file("docs/api"))
-    failOnWarning.set(true)
+dokka {
+    dokkaPublications.html {
+        outputDirectory.set(rootProject.file("docs/api"))
+        failOnWarning.set(true)
+    }
 }
 
 apply(from = "${rootDir}/scripts/generate-dokka.gradle")
@@ -23,7 +24,7 @@ subprojects {
     spotless {
         kotlin {
             target("**/*.kt")
-            targetExclude("$buildDir/**/*.kt")
+            targetExclude(layout.buildDirectory.get().asFile.absolutePath + "/**/*.kt")
 
             ktlint("0.48.2")
             licenseHeaderFile(rootProject.file("spotless/copyright.kt"))

@@ -1,4 +1,4 @@
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 apply(from = "${rootDir}/publish.gradle")
 apply(from = "${rootDir}/scripts/publish-root.gradle")
@@ -6,8 +6,9 @@ apply(from = "${rootDir}/scripts/publish-module.gradle")
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("me.tylerbwong.gradle.metalava") version "0.3.2"
+//    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("me.tylerbwong.gradle.metalava") version "0.5.0"
     id("org.jetbrains.dokka")
 }
 
@@ -18,11 +19,10 @@ metalava {
 
 android {
     namespace = "io.sanghun.compose.video"
-    compileSdk = 33
+    compileSdk = 36
 
     defaultConfig {
-        minSdk = 23
-        targetSdk = 32
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -42,11 +42,25 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+//    kotlin {
+//        compilerOptions {
+//            jvmTarget.set(JvmTarget.JVM_1_8)
+//        }
+//    }
+    lint {
+        targetSdk = 36
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    testOptions {
+        targetSdk = 36
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_1_8)
     }
 }
 
