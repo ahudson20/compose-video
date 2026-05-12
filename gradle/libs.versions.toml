@@ -2,7 +2,7 @@
 
 compose = "1.11.1"
 compose-compiler = "1.5.15"
-media3 = "1.10.0"
+media3 = "1.10.1"
 kotlin = "2.3.21"
 
 [libraries]
