@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -65,6 +66,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.util.UUID
+import kotlin.time.Duration.Companion.milliseconds
 
 /**
  * [VideoPlayer] is UI component that can play video in Jetpack Compose. It works based on ExoPlayer.
@@ -128,7 +130,7 @@ fun VideoPlayer(
     playerInstance: ExoPlayer.() -> Unit = {},
 ) {
     val context = LocalContext.current
-    var currentTime by remember { mutableStateOf(0L) }
+    var currentTime by remember { mutableLongStateOf(0L) }
 
     var mediaSession = remember<MediaSession?> { null }
 
@@ -170,7 +172,7 @@ fun VideoPlayer(
 
     LaunchedEffect(Unit) {
         while (true) {
-            delay(1000)
+            delay(1000.milliseconds)
 
             if (currentTime != player.currentPosition) {
                 onCurrentTimeChanged(currentTime)
