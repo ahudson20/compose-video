@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "io.sanghun.compose.video"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 24
@@ -31,10 +31,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     lint {
-        targetSdk = 36
+        targetSdk = 37
     }
     testOptions {
-        targetSdk = 36
+        targetSdk = 37
     }
 }
 

@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "io.sanghun.compose.video.benchmark"
 
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         minSdk = 24
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

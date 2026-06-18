@@ -31,7 +31,7 @@ internal fun Activity.setFullScreen(fullscreen: Boolean) {
 /**
  * Bring the window to full screen. (Remove the status bar and navigation bar.)
  */
-@Suppress("Deprecation")
+//@Suppress("Deprecation")
 internal fun Window.setFullScreen(fullscreen: Boolean) {
     if (fullscreen) {
         this.hideSystemBars()
